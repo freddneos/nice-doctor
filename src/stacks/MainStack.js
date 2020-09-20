@@ -1,14 +1,18 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StackActions } from "@react-navigation/native";
+
+import Preload from "../screens/Preload";
+import SignIn from "../screens/SignIn";
+import SignUp from "../screens/SignUp";
+
+const Stack = createStackNavigator();
 
 export default function MainStack() {
   return (
-    <StackActions.Navigator>
-      <StackActions.Screen name="Preload" component={Preload} />
-      {/* <StackActions.Screen name="SignIn" component={SignIn} />
-          <StackActions.Screen name="SignUp" component={SignUp} />
-    */}
-    </StackActions.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen name="Preload" component={Preload} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="SignIn" component={SignIn} />
+    </Stack.Navigator>
   );
 }
