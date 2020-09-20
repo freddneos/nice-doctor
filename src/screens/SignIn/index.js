@@ -20,7 +20,7 @@ import { Alert } from "react-native";
 
 export default () => {
   const navigation = useNavigation();
-  const [emailField, setEmailField] = useState("fredd@neosdev.com.br");
+  const [emailField, setEmailField] = useState("");
   const [passwordField, setPasswordField] = useState("");
 
   const handleSignIn = () => {
