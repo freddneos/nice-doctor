@@ -11,7 +11,3 @@ export default ({ children }) => {
     </UserContext.Provider>
   );
 };
-
-export default function UserContext() {
-  return <div></div>;
-}
