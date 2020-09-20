@@ -4,6 +4,7 @@ import { Container, LoadingIcon } from "./styles";
 
 import Logo from "../../assets/doctor_hearth_beat.svg";
 import { useNavigation } from "@react-navigation/native";
+import { MainIconColor } from "../../global/theme";
 
 export default () => {
   const navigation = useNavigation();
@@ -22,7 +23,7 @@ export default () => {
   return (
     <Container>
       <Logo width="60%" height="60%" />
-      <LoadingIcon size="large" color="#FFF" />
+      <LoadingIcon size="large" color={MainIconColor} />
     </Container>
   );
 };
