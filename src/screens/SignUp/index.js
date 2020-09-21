@@ -14,9 +14,9 @@ import {
 } from "./styles";
 import IconInput from "../../components/IconInput";
 import Logo from "../../assets/doctor_hearth_beat.svg";
-import EmailIcon from "../../assets/icons/email-outline";
-import LockIcon from "../../assets/icons/lock";
-import AccountIcon from "../../assets/icons/account";
+import EmailIcon from "../../assets/icons/email-outline.svg";
+import LockIcon from "../../assets/icons/lock.svg";
+import AccountIcon from "../../assets/icons/account.svg";
 import api from "../../services/accountService";
 
 export default () => {

@@ -14,8 +14,8 @@ import {
 } from "./styles";
 import IconInput from "../../components/IconInput";
 import Logo from "../../assets/doctor_hearth_beat.svg";
-import EmailIcon from "../../assets/icons/email-outline";
-import LockIcon from "../../assets/icons/lock";
+import EmailIcon from "../../assets/icons/email-outline.svg";
+import LockIcon from "../../assets/icons/lock.svg";
 import api from "../../services/accountService";
 
 export default () => {
@@ -33,7 +33,7 @@ export default () => {
         userDispatch({
           type: "setAvatar",
           payload: {
-            avatar: response.picture_url,
+            avatar: response.user.picture_url,
           },
         });
 
