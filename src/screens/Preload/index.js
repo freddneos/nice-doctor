@@ -14,7 +14,7 @@ export default () => {
       if (token) {
         //validate token
         navigation.reset({
-          routes: [{ name: "SignIn" }],
+          routes: [{ name: "MainTab" }],
         });
       } else {
         navigation.navigate("SignIn");
