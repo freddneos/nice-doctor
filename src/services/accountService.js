@@ -2,29 +2,36 @@ import { BASE_API } from "./apiBase";
 
 export default {
   checkToken: async () => {},
-  signIn: async ({ email, password }) => {
+  signIn: async (email, password) => {
     const req = await fetch(`${BASE_API}/auth`, {
       method: "POST",
-      header: {
-        Accept: "application/json",
+      headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({ email, password }),
     });
-
-    const json = req.json();
-    return json;
+    if (req.status == 200) {
+      let { data } = await req.json();
+      return data;
+    } else {
+      return { error: await req.text() };
+    }
   },
-  signUp: async ({ email, password , name }) => {
+  signUp: async (name, email, password) => {
+    console.log(`${BASE_API}/register`, email, password, name);
     const req = await fetch(`${BASE_API}/register`, {
       method: "POST",
-      header: {
-        Accept: "application/json",
+      headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ email, password , name }),
+      body: JSON.stringify({ email, password, name }),
     });
 
-    const json = req.json();
-    return json,
+    if (req.status == 200) {
+      let { data } = await req.json();
+      return data;
+    } else {
+      return { error: await req.text() };
+    }
+  },
 };

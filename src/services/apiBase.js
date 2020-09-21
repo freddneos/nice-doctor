@@ -1,1 +1,1 @@
-export const BASE_API = "https://drmarkey-api.herokuapp.com/api/v1/";
+export const BASE_API = "https://drmarkey-api.herokuapp.com/api/v1";
