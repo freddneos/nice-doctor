@@ -1,9 +1,9 @@
 {
-  "name": "mkmobile",
-  "displayName": "mkmobile",
+  "name": "nicedoctor",
+  "displayName": "nicedoctor",
   "expo": {
-    "name": "mkmobile",
-    "slug": "mkmobile",
+    "name": "nicedoctor",
+    "slug": "nicedoctor",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

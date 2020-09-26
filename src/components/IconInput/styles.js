@@ -1,11 +1,11 @@
 import react from "react";
 import styled from "styled-components/native";
-import { MainIconColor } from "../../global/theme";
+import { MainIconColor ,MainInputColor } from "../../global/theme";
 
 export const InputArea = styled.View`
   width: 100%;
   height: 60px;
-  background-color: #e6e6f1;
+  background-color: ${MainInputColor};
   flex-direction: row;
   padding-left: 15px;
   align-items: center;

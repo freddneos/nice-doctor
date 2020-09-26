@@ -8,4 +8,5 @@ export const MainbackgroundColorDark = "#000";
 
 export const MainIconColorOnColor = "#FFF";
 export const MainIconColor = "#9595A8";
+export const MainInputColor = "#e6e6f1";
 

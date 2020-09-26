@@ -46,7 +46,7 @@ export default () => {
           routes: [{ name: "MainTab" }],
         });
       } else {
-        alert("Erro no login", response.error);
+        alert("Erro no login", error);
       }
     } else {
       alert("Preencha os campos.");
