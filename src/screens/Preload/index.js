@@ -6,13 +6,15 @@ import Logo from "../../assets/doctor_hearth_beat.svg";
 import { useNavigation } from "@react-navigation/native";
 import { MainIconColor } from "../../global/theme";
 
+
 export default () => {
   const navigation = useNavigation();
+
+
   useEffect(() => {
     const checkToken = async () => {
-      const token = await AsyncStorage.getItem("token");
-      if (token) {
-        //validate token
+      const userToken = await AsyncStorage.getItem("apitoken");
+      if (userToken) {
         navigation.reset({
           routes: [{ name: "MainTab" }],
         });

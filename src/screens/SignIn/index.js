@@ -1,6 +1,8 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import firebase from "../../services/firebaseService"
 
 import { UserContext } from "../../contexts/UserContext";
 import {
@@ -19,24 +21,27 @@ import LockIcon from "../../assets/icons/lock.svg";
 import api from "../../services/accountService";
 
 export default () => {
+  const [user, loading, error] = useAuthState(firebase.auth());
   const { dispatch: userDispatch } = useContext(UserContext);
   const navigation = useNavigation();
-  const [emailField, setEmailField] = useState("fredd.bezerra@outlook.com");
-  const [passwordField, setPasswordField] = useState("12345678");
+  const [emailField, setEmailField] = useState("fredd@fredd.com.io");
+  const [passwordField, setPasswordField] = useState("fredd123");
+
+
 
   const handleSignIn = async () => {
     console.log("Handle Sign In button click");
     if (emailField !== "" && passwordField !== "") {
-      let response = await api.signIn(emailField, passwordField);
-      if (response.token) {
-        await AsyncStorage.setItem("token", response.token);
+      await firebase.auth().signInWithEmailAndPassword(emailField, passwordField);
+      if (user) {
+        let token = await user.getIdToken()
+        await AsyncStorage.setItem("apitoken", token);
         userDispatch({
           type: "setAvatar",
           payload: {
-            avatar: response.user.picture_url,
+            avatar: user.photoURL || "",
           },
         });
-
         navigation.reset({
           routes: [{ name: "MainTab" }],
         });
@@ -72,16 +77,19 @@ export default () => {
           onChangeText={(t) => setPasswordField(t)}
           password
         />
-
-        <CustomButton onPress={handleSignIn}>
-          <CustomButtonText>Login</CustomButtonText>
-        </CustomButton>
-        <SignMessageButton onPress={handleMessageButtonClick}>
-          <SignMessageButtonText>
-            Ainda não tem uma conta ?
-          </SignMessageButtonText>
-          <SignMessageButtonTextBold>Cadastre-se</SignMessageButtonTextBold>
-        </SignMessageButton>
+        {!loading && (
+          <>
+            <CustomButton onPress={handleSignIn} >
+              <CustomButtonText>Login</CustomButtonText>
+            </CustomButton >
+            <SignMessageButton onPress={handleMessageButtonClick}>
+              <SignMessageButtonText>
+                Ainda não tem uma conta ?
+        </SignMessageButtonText>
+              <SignMessageButtonTextBold>Cadastre-se</SignMessageButtonTextBold>
+            </SignMessageButton>
+          </>
+        )}
       </InputArea>
     </Container>
   );
