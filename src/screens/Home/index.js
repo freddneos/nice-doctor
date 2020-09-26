@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
 import * as Location from "expo-location";
-//import usePermissions from "expo-permissions-hooks";
+import { useList } from 'react-firebase-hooks/database';
 import { useNavigation } from "@react-navigation/native"
-import { Container, Scroller, HeaderArea, HeaderTitle, SeachButton, LocationArea, LocationFinder, LocationInput, Loader } from "./styles";
+import firebase from "../../services/firebaseService"
+import { Container, Scroller, HeaderArea, HeaderTitle, SeachButton, ListArea, LocationArea, LocationFinder, LocationInput, Loader } from "./styles";
 import { Text } from "react-native";
 import { MainColor } from "../../global/theme";
 import SearchIcon from "../../assets/icons/search.svg";
 import MyLocationIcon from "../../assets/icons/my-location.svg";
+import CardWithAvatar from "../../components/CardWithAvatar";
 
 
 export default () => {
   const navigation = useNavigation();
   const [locationtext, setLocationText] = useState();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [locationCoords, setLocationCoords] = useState();
+  const [snapshots, loadingFirebase: loading, error] = useList(firebase.database().ref('doctors'));
 
+  console.table(snapshots)
   const handleLocationPermitted = async () => {
     let { coords } = await Location.getCurrentPositionAsync({ enableHighAccuracy: true })
     let reverseLocation = await Location.reverseGeocodeAsync({ longitude: coords.longitude, latitude: coords.latitude })
@@ -37,12 +41,14 @@ export default () => {
       await handleLocationPermitted()
     }
   }
-  useEffect(() => {
-    checkLocation()
-  }, [])
+
+  // useEffect(() => {
+  //   checkLocation()
+  // }, [])
   const handleLocationFinder = async () => {
     checkLocation()
   }
+
   return (
     <Container>
       <Scroller>
@@ -71,6 +77,11 @@ export default () => {
           </LocationFinder>
         </LocationArea>
 
+        <ListArea>
+          {snapshots.map((data, key) => (
+            <CardWithAvatar key={key} data={data.val()} />
+          ))}
+        </ListArea>
       </Scroller>
     </Container>
   );
